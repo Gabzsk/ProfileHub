@@ -1,4 +1,4 @@
-import { createContext, useState, type ReactNode } from "react";
+import { createContext, useEffect, useState, type ReactNode } from "react";
 /*
 createContext: função que cria o contexto (compartilhar dados entre componentes sem precisar passar props manualmente em cada nível da árvore de componentes).
 useState: hook para controlar o estado (user, por exemplo).
@@ -13,6 +13,7 @@ type User = {
 // Define o tipo dos dados e funções que o contexto vai fornecer (função login e logout, assim como o dado User criado acima)
 type AuthContextType = {
   user: User | null;
+  isLoading: boolean;
   login: (email: string) => void;
   logout: () => void;
 };
@@ -21,6 +22,7 @@ type AuthContextType = {
 // AUthentication Context
 export const AuthContext = createContext<AuthContextType>({
   user: null,
+  isLoading: true,
   login: () => {},
   logout() {},
 });
@@ -29,20 +31,35 @@ export const AuthContext = createContext<AuthContextType>({
 // Authentication Provider
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
+  // 1. Tenta carregar o usuário salvo ao iniciar o app
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+    setIsLoading(false);
+  }, []);
+
+  // 2. Quando logar, salva no localStorage
   function login(email: string) {
+    const newUser = { email };
     setUser({ email }); // salva o usuário
+    localStorage.setItem("user", JSON.stringify(newUser));
   }
 
+  // 3. Quando deslogar, remove do localStorage
   function logout() {
     setUser(null); // remove o usuário
+    localStorage.removeItem("user");
   }
 
   // Retornamos um Provider do contexto.
   // Tudo que estiver dentro de AuthProvider terá acesso ao user, login() e logout() - main.tsx
   // Passamos children que representa qualquer coisa dentro do <AuthProvider>
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, isLoading }}>
       {children}
     </AuthContext.Provider>
   );
