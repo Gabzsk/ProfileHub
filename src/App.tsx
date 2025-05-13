@@ -3,12 +3,20 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import Profile from "./pages/Profile/Profile";
 import PrivateRoute from "./routes/PrivateRoute";
+import PublicRoute from "./routes/PublicRoute";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />}></Route>
+        <Route
+          path="/"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        ></Route>
         <Route
           path="/profile"
           element={

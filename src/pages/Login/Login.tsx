@@ -17,6 +17,14 @@ function Login() {
   // Navigate
   const navigate = useNavigate();
 
+  //const { user } = useContext(AuthContext);
+  // // Caso o usuário já tenha feito login antes, acessar a URL "/" novamente (ou voltar com a seta do navegador) o levará para a página de perfil.
+  // useEffect(() => {
+  //   if (user) {
+  //     navigate("/profile", { replace: true });
+  //   }
+  // }, [user, navigate]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
