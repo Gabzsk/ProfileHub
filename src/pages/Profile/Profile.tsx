@@ -1,24 +1,26 @@
-import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+import { useLogout } from "../../hooks/useLogout";
+import "./Profile.css";
+import ProfileCard from "../../components/ProfileCard";
 
 const Profile = () => {
-  const { user, logout } = useContext(AuthContext); // pega o usuário atual
+  const { user } = useContext(AuthContext); // pega o usuário atual
+  const logout = useLogout();
 
   if (!user) return <p>User not authenticated.</p>;
 
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    logout();
-    navigate("/");
-  };
-
   return (
-    <div style={{ padding: "2rem" }}>
-      <h2>Welcome, {user.email}!</h2>
-      <p>This is your personal profile.</p>
-      <button onClick={handleLogout}>LOGOUT</button>
+    <div className="main-component">
+      <ProfileCard
+        name={"Gabriel Nobre Modesto"}
+        email={"nobremodestocontato@gmail.com"}
+        bio={"FrontEnd Dev"}
+        avatarUrl={"https://i.pravatar.cc/150?img=8"}
+        githubUrl="https://github.com/Gabzsk"
+        linkedinUrl="https://www.linkedin.com/in/gabrielmodesto/"
+        twitterUrl="https://x.com/Gabiziski"
+      />
     </div>
   );
 };
