@@ -1,12 +1,32 @@
 import "./App.css";
-import Login from "./pages/Home/Login/Login";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login/Login";
+import Profile from "./pages/Profile/Profile";
+import PrivateRoute from "./routes/PrivateRoute";
+import PublicRoute from "./routes/PublicRoute";
 
 function App() {
   return (
-    <div className="main-container">
-      <h2>Sign in to ProfileHub</h2>
-      <Login />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        ></Route>
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          }
+        ></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
