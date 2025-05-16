@@ -3,6 +3,7 @@
 Social profile application developed with React, Vite and TypeScript.
 
 This project was developed with a focus on learning and good practices for modern FrontEnd. Key technologies and concepts used include:
+
 🌐React Router
 Implementation of routes with React Router Dom that allow navigation between pages such as login and profile without reloading the page. Protection of routes based on the authentication status of the user.
 
