@@ -1,26 +1,57 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import { useLogout } from "../../hooks/useLogout";
 import "./Profile.css";
 import ProfileCard from "../../components/ProfileCard";
+import EditProfileForm from "../../components/EditProfileForm";
 
 const Profile = () => {
-  const { user } = useContext(AuthContext); // pega o usuário atual
-  const logout = useLogout();
+  const { user, logout, updateUser } = useContext(AuthContext); // pega o usuário atual do Context (no qual é pego em types/User.ts)
+  const [isEditing, setIsEditing] = useState(false); // Controla se o formulário está visível
 
-  if (!user) return <p>User not authenticated.</p>;
+  if (!user) return <p>User not authenticated.</p>; // se não estiver logado
+
+  // <div className="main-component">
+  //   {!isEditing ? (
+  //     <>
+  //       <ProfileCard user={user} />
+  //       <div className="profile-buttons">
+  //         <button className="logout-btn" onClick={logout}>
+  //           Logout
+  //         </button>
+  //         <button className="edit-btn" onClick={() => setIsEditing(true)}>
+  //           Edit Profile
+  //         </button>
+  //       </div>
+  //     </>
+  //   ) : (
+  //     <EditProfileForm
+  //       user={user}
+  //       onCancel={() => setIsEditing(false)}
+  //       onSave={updateUser}
+  //     />
+  //   )}
+  // </div>
 
   return (
-    <div className="main-component">
-      <ProfileCard
-        name={"Gabriel Nobre Modesto"}
-        email={"nobremodestocontato@gmail.com"}
-        bio={"FrontEnd Dev"}
-        avatarUrl={"https://i.pravatar.cc/150?img=8"}
-        githubUrl="https://github.com/Gabzsk"
-        linkedinUrl="https://www.linkedin.com/in/gabrielmodesto/"
-        twitterUrl="https://x.com/Gabiziski"
-      />
+    <div className="profile-page">
+      <ProfileCard user={user} />
+
+      <div className="profile-buttons">
+        <button className="edit-btn" onClick={() => setIsEditing(!isEditing)}>
+          {isEditing ? "Cancel" : "Edit Profile"}
+        </button>
+        <button className="logout-btn">Logout</button>
+      </div>
+
+      {isEditing && (
+        <EditProfileForm
+          user={user}
+          onSave={(updatedData) => {
+            updateUser(updatedData);
+            setIsEditing(false);
+          }}
+        />
+      )}
     </div>
   );
 };

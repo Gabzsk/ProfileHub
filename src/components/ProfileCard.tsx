@@ -1,61 +1,34 @@
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
-import { AuthContext } from "../contexts/AuthContext";
-import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { type User } from "../types/User";
 
 interface ProfileCardProps {
-  name: string;
-  email: string;
-  bio: string;
-  avatarUrl: string;
-  githubUrl?: string;
-  linkedinUrl?: string;
-  twitterUrl?: string;
+  user: User; // cria a props user, que recebe um objeto do tipo types/User.ts
 }
 
-const ProfileCard = ({
-  name,
-  email,
-  bio,
-  avatarUrl,
-  githubUrl,
-  linkedinUrl,
-  twitterUrl,
-}: ProfileCardProps) => {
-  const { logout } = useContext(AuthContext);
-  const navigate = useNavigate();
-
-  const handleLogOut = () => {
-    logout();
-    navigate("/");
-  };
-
+const ProfileCard = ({ user }: ProfileCardProps) => {
   return (
     <div className="profile-card">
-      <img src={avatarUrl} alt={name} className="profile-avatar" />
-      <h2>{name}</h2>
-      <p className="profile-email">{email}</p>
-      <p className="profile-bio">{bio}</p>
+      <img src={user.imageUrl} alt={user.name} className="profile-avatar" />
+      <h2>{user.name}</h2>
+      <p className="profile-email">{user.email}</p>
+      <p className="profile-bio">{user.bio}</p>
       <div className="profile-socials">
-        {githubUrl && (
-          <a href={githubUrl} target="_blank" rel="noopener noreferrer">
+        {user.githubUrl && (
+          <a href={user.githubUrl} target="_blank" rel="noopener noreferrer">
             <FaGithub />
           </a>
         )}
-        {linkedinUrl && (
-          <a href={linkedinUrl} target="_blank" rel="noopener noreferrer">
+        {user.linkedinUrl && (
+          <a href={user.linkedinUrl} target="_blank" rel="noopener noreferrer">
             <FaLinkedin />
           </a>
         )}
-        {twitterUrl && (
-          <a href={twitterUrl} target="_blank" rel="noopener noreferrer">
+        {user.twitterUrl && (
+          <a href={user.twitterUrl} target="_blank" rel="noopener noreferrer">
             <FaXTwitter />
           </a>
         )}
       </div>
-      <button className="logout-btn" onClick={handleLogOut}>
-        LOGOUT
-      </button>
     </div>
   );
 };

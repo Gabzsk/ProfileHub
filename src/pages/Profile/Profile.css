@@ -37,16 +37,34 @@
   color: var(--color-primary);
 }
 
-.logout-btn {
-  border: none;
-  border-radius: 25px;
-  font-size: 1rem;
-  cursor: pointer;
-  background-color: var(--color-primary);
-  color: white;
-  transition: background-color 0.3s;
+.profile-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
-.logout-btn:hover {
+.edit-btn,
+.logout-btn {
+  padding: 0.5rem 2rem;
+  font-size: 1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.logout-btn {
+  border: solid 2px var(--color-primary);
+  background-color: white;
+  color: #333;
+}
+
+.edit-btn {
+  border: none;
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.edit-btn:hover {
   background-color: var(--color-primary-hover);
 }
