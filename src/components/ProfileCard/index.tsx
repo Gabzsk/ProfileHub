@@ -1,5 +1,5 @@
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
-import { type User } from "../types/User";
+import { type User } from "../../types/User";
 
 interface ProfileCardProps {
   user: User; // cria a props user, que recebe um objeto do tipo types/User.ts

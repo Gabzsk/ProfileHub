@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { type EditableUserFields, type User } from "../types/User";
-import "./EditProfileForm.css";
+import { type EditableUserFields, type User } from "../../types/User";
+import "./styles.css";
 
 type EditProfileFormProps = {
   user: User;
