@@ -4,7 +4,7 @@ Social profile application developed with React, Vite and TypeScript.
 
 ## 🚀 Display
 
-[Link para a aplicação](https://profilehubbr.netlify.app)
+[Application link](https://profilehubbr.netlify.app)
 
 ## 📸 Screenshots
 
