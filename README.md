@@ -8,8 +8,8 @@ Social profile application developed with React, Vite and TypeScript.
 
 ## 📸 Screenshots
 
-![Captura de Tela 1](./screenshots/screenshot_1.png)
-![Captura de Tela 2](./screenshots/screenshot_2.png)
+![Sreenshot 1](./src/screenshots/Screenshot_1.png)
+![Sreenshot 2](./src/screenshots/Screenshot_2.png)
 
 ## 🧰 Technologies Used
 
