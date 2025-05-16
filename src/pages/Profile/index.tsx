@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
-import "./Profile.css";
+import "./styles.css";
 import ProfileCard from "../../components/ProfileCard";
 import EditProfileForm from "../../components/EditProfileForm";
 
@@ -10,37 +10,17 @@ const Profile = () => {
 
   if (!user) return <p>User not authenticated.</p>; // se não estiver logado
 
-  // <div className="main-component">
-  //   {!isEditing ? (
-  //     <>
-  //       <ProfileCard user={user} />
-  //       <div className="profile-buttons">
-  //         <button className="logout-btn" onClick={logout}>
-  //           Logout
-  //         </button>
-  //         <button className="edit-btn" onClick={() => setIsEditing(true)}>
-  //           Edit Profile
-  //         </button>
-  //       </div>
-  //     </>
-  //   ) : (
-  //     <EditProfileForm
-  //       user={user}
-  //       onCancel={() => setIsEditing(false)}
-  //       onSave={updateUser}
-  //     />
-  //   )}
-  // </div>
-
   return (
     <div className="profile-page">
       <ProfileCard user={user} />
 
       <div className="profile-buttons">
+        <button className="logout-btn" onClick={logout}>
+          Logout
+        </button>
         <button className="edit-btn" onClick={() => setIsEditing(!isEditing)}>
           {isEditing ? "Cancel" : "Edit Profile"}
         </button>
-        <button className="logout-btn">Logout</button>
       </div>
 
       {isEditing && (
